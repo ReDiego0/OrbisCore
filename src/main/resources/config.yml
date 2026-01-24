@@ -1,0 +1,7 @@
+# Configuración general de OrbisCore
+general:
+  debug_mode: false
+  auto_save_interval: 10
+
+storage:
+  type: YAML # Por ahora solo YAML, futuro: MYSQL

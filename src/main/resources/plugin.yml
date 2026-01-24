@@ -2,3 +2,24 @@ name: OrbisCore
 version: '1.0.0'
 main: org.ReDiego0.orbisCore.OrbisCore
 api-version: '1.21'
+authors: [ReDiego0]
+description: Core RPG para el servidor Orbis.
+
+depend:
+  - PlaceholderAPI
+softdepend:
+  - MythicMobs
+  - Citizens
+  - WorldGuard
+
+commands:
+  orbis:
+    description: Comando principal de administración para OrbisCore.
+    usage: /orbis <setclass|equip|reload>
+    permission: orbis.admin
+    aliases: [oc]
+
+permissions:
+  orbis.admin:
+    description: Permite usar todos los comandos de administración.
+    default: op

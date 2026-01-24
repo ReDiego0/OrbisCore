@@ -1,6 +1,7 @@
 package org.ReDiego0.orbisCore
 
 import org.ReDiego0.orbisCore.config.ClassRegistry
+import org.ReDiego0.orbisCore.ether.EtherTask // <--- Import nuevo
 import org.ReDiego0.orbisCore.player.OrbisPapiExpansion
 import org.ReDiego0.orbisCore.player.PlayerListener
 import org.ReDiego0.orbisCore.player.PlayerManager
@@ -25,15 +26,16 @@ class OrbisCore : JavaPlugin() {
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             OrbisPapiExpansion(this).register()
-            logger.info("Hook con PlaceholderAPI registrado correctamente.")
-        } else {
-            logger.warning("PlaceholderAPI no encontrado. Los menús no funcionarán bien.")
         }
+
+        EtherTask(this).runTaskTimer(this, 0L, 20L)
 
         logger.info("OrbisCore cargado correctamente.")
     }
 
     override fun onDisable() {
+        Bukkit.getScheduler().cancelTasks(this)
+
         if (::playerManager.isInitialized) {
             playerManager.saveAll()
         }
