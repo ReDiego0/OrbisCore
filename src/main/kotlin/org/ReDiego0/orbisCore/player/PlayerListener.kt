@@ -1,6 +1,5 @@
 package org.ReDiego0.orbisCore.player
 
-import org.ReDiego0.orbisCore.modules.player.PlayerManager
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
