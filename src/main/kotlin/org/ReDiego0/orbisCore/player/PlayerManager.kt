@@ -1,6 +1,7 @@
-package org.ReDiego0.orbisCore.modules.player
+package org.ReDiego0.orbisCore.player
 
 import org.ReDiego0.orbisCore.OrbisCore
+import org.ReDiego0.orbisCore.config.SkillSlot
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.util.UUID
@@ -21,11 +22,17 @@ class PlayerManager(private val plugin: OrbisCore) {
         if (!file.exists()) {
             val newData = PlayerData(uuid)
             playerCache[uuid] = newData
-            savePlayer(uuid) // Guardar el archivo inicial
+            savePlayer(uuid)
             return
         }
 
         val config = YamlConfiguration.loadConfiguration(file)
+
+        val loadedUnlocked = config.getStringList("skills.unlocked").toMutableSet()
+
+        val loadedEquipped = HashMap<SkillSlot, String>()
+        if (config.contains("skills.equipped.Q")) loadedEquipped[SkillSlot.Q] = config.getString("skills.equipped.Q")!!
+        if (config.contains("skills.equipped.F")) loadedEquipped[SkillSlot.F] = config.getString("skills.equipped.F")!!
 
         val data = PlayerData(
             uuid = uuid,
@@ -33,7 +40,9 @@ class PlayerManager(private val plugin: OrbisCore) {
             level = config.getInt("level", 1),
             experience = config.getDouble("experience", 0.0),
             currentMana = config.getDouble("mana.current", 100.0),
-            maxMana = config.getDouble("mana.max", 100.0)
+            maxMana = config.getDouble("mana.max", 100.0),
+            unlockedSkills = loadedUnlocked,
+            equippedSkills = loadedEquipped
         )
         playerCache[uuid] = data
     }
@@ -57,6 +66,10 @@ class PlayerManager(private val plugin: OrbisCore) {
         config.set("experience", data.experience)
         config.set("mana.current", data.currentMana)
         config.set("mana.max", data.maxMana)
+
+        config.set("skills.unlocked", data.unlockedSkills.toList())
+        if (data.equippedSkills.containsKey(SkillSlot.Q)) config.set("skills.equipped.Q", data.equippedSkills[SkillSlot.Q])
+        if (data.equippedSkills.containsKey(SkillSlot.F)) config.set("skills.equipped.F", data.equippedSkills[SkillSlot.F])
 
         try {
             config.save(file)
