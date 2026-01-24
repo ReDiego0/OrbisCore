@@ -1,0 +1,4 @@
+name: OrbisCore
+version: '1.0.0'
+main: org.ReDiego0.orbisCore.OrbisCore
+api-version: '1.21'
