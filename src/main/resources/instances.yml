@@ -1,0 +1,45 @@
+instances:
+  CATACOMBAS:
+    world_name: "dungeon_catacomb_01"
+    display_name: "&7Catacumbas del Olvido"
+
+    loot_tables:
+      BASIC:
+        category_chance: 0.3 # 30% chance global
+        items:
+          - id: "moneda_cobre"
+            chance: 1.0
+            min: 1
+            max: 3
+          - id: "venda_sucia"
+            chance: 0.5
+            min: 1
+            max: 1
+
+      IMPORTANT:
+        category_chance: 1.0 # Un Elite SIEMPRE suelta algo de esta categoría
+        items:
+          - id: "moneda_plata"
+            chance: 1.0
+            min: 1
+            max: 2
+          - id: "llave_oxidada"
+            chance: 0.2
+            min: 1
+            max: 1
+          - id: "fragmento_armadura"
+            chance: 0.5
+            min: 1
+            max: 3
+
+      DECISIVE:
+        category_chance: 1.0
+        items:
+          - id: "moneda_oro"
+            chance: 1.0
+            min: 5
+            max: 10
+          - id: "reliquia_sombria" # Objeto único de la dungeon
+            chance: 0.1 # 10% (Raro)
+            min: 1
+            max: 1
