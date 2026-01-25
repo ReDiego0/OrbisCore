@@ -1,7 +1,7 @@
 package org.ReDiego0.orbisCore.commands
 
 import org.ReDiego0.orbisCore.OrbisCore
-import org.ReDiego0.orbisCore.config.SkillSlot // <--- Importante: Importar el Enum
+import org.ReDiego0.orbisCore.config.SkillSlot
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

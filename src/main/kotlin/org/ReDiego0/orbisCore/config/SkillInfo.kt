@@ -6,5 +6,7 @@ data class SkillInfo(
     val mmSkill: String,
     val minLevel: Int,
     val validSlot: SkillSlot,
-    val description: List<String>
+    val description: List<String>,
+    val manaCost: Double,
+    val cooldown: Double // en segundos
 )

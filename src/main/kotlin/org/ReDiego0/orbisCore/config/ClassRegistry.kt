@@ -43,7 +43,9 @@ class ClassRegistry(private val plugin: OrbisCore) {
                             mmSkill = config.getString("$sPath.mm_skill", "SkillError")!!,
                             minLevel = config.getInt("$sPath.min_level", 1),
                             validSlot = slotEnum,
-                            description = config.getStringList("$sPath.description").map { it.replace("&", "§") }
+                            description = config.getStringList("$sPath.description").map { it.replace("&", "§") },
+                            manaCost = config.getDouble("$sPath.mana_cost", 0.0),
+                            cooldown = config.getDouble("$sPath.cooldown", 0.0)
                         )
                         skillsMap[skillId] = skill
                     }
