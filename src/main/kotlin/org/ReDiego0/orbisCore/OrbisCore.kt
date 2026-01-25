@@ -5,6 +5,7 @@ import org.ReDiego0.orbisCore.combat.SkillExecutor
 import org.ReDiego0.orbisCore.commands.OrbisCommand
 import org.ReDiego0.orbisCore.config.ClassRegistry
 import org.ReDiego0.orbisCore.ether.EtherTask // <--- Import nuevo
+import org.ReDiego0.orbisCore.items.ItemProvider
 import org.ReDiego0.orbisCore.player.OrbisPapiExpansion
 import org.ReDiego0.orbisCore.player.PlayerListener
 import org.ReDiego0.orbisCore.player.PlayerManager
@@ -18,12 +19,15 @@ class OrbisCore : JavaPlugin() {
     lateinit var classRegistry: ClassRegistry
         private set
     lateinit var skillExecutor: SkillExecutor
+    lateinit var itemProvider: ItemProvider
 
     override fun onEnable() {
         logger.info("Iniciando OrbisCore...")
 
         classRegistry = ClassRegistry(this)
         classRegistry.loadClasses()
+
+        itemProvider = ItemProvider(this)
 
         playerManager = PlayerManager(this)
         server.pluginManager.registerEvents(PlayerListener(playerManager), this)
