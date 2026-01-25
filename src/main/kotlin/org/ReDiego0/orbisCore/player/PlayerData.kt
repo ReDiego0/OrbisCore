@@ -32,6 +32,12 @@ data class PlayerData(
 
     fun equipSkill(slot: SkillSlot, skillId: String): Boolean {
         if (!isSkillUnlocked(skillId)) return false
+
+        val currentSlot = equippedSkills.entries.find { it.value == skillId }?.key
+        if (currentSlot != null) {
+            equippedSkills.remove(currentSlot)
+        }
+
         equippedSkills[slot] = skillId
         return true
     }

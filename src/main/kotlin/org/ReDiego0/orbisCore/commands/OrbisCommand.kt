@@ -1,7 +1,7 @@
 package org.ReDiego0.orbisCore.commands
 
 import org.ReDiego0.orbisCore.OrbisCore
-import org.ReDiego0.orbisCore.config.SkillSlot
+import org.ReDiego0.orbisCore.config.SkillSlot // <--- Importante: Importar el Enum
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -25,7 +25,6 @@ class OrbisCommand(private val plugin: OrbisCore) : CommandExecutor {
 
         when (args[0].lowercase()) {
             "setclass" -> {
-                // /orbis setclass VANGUARDIA
                 if (args.size < 2) return false
                 val classId = args[1].uppercase()
 
@@ -39,7 +38,6 @@ class OrbisCommand(private val plugin: OrbisCore) : CommandExecutor {
             }
 
             "unlock" -> {
-                // /orbis unlock golpe_sismico
                 if (args.size < 2) return false
                 val skillId = args[1].lowercase()
                 data.unlockedSkills.add(skillId)
@@ -47,17 +45,32 @@ class OrbisCommand(private val plugin: OrbisCore) : CommandExecutor {
             }
 
             "equip" -> {
-                // /orbis equip Q golpe_sismico
                 if (args.size < 3) return false
                 val slotStr = args[1].uppercase()
                 val skillId = args[2].lowercase()
 
-                val slot = try { SkillSlot.valueOf(slotStr) } catch (e: Exception) {
-                    sender.sendMessage("§cSlot inválido. Usa Q o F."); return true
+                val slot = try {
+                    SkillSlot.valueOf(slotStr)
+                } catch (e: IllegalArgumentException) {
+                    sender.sendMessage("§cSlot inválido. Usa Q o F.")
+                    return true
+                }
+
+                val classInfo = plugin.classRegistry.getClass(data.className)
+                val skillInfo = classInfo?.skills?.get(skillId)
+
+                if (skillInfo == null) {
+                    sender.sendMessage("§cEsa habilidad no existe o no es de tu clase actual.")
+                    return true
+                }
+
+                if (skillInfo.validSlot != slot) {
+                    sender.sendMessage("§cError: La habilidad '${skillInfo.displayName}' solo se puede equipar en la tecla §e${skillInfo.validSlot}.")
+                    return true
                 }
 
                 if (data.equipSkill(slot, skillId)) {
-                    sender.sendMessage("§aEquipada $skillId en $slot")
+                    sender.sendMessage("§aEquipada ${skillInfo.displayName} en §e$slot")
                 } else {
                     sender.sendMessage("§cError: No tienes desbloqueada esa skill.")
                 }
