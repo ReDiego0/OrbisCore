@@ -1,7 +1,10 @@
 package org.ReDiego0.orbisCore.player
 
 import org.ReDiego0.orbisCore.config.SkillSlot
+import org.bukkit.Bukkit
+import org.bukkit.Sound
 import java.util.UUID
+import kotlin.math.pow
 
 data class PlayerData(
     val uuid: UUID,
@@ -16,9 +19,37 @@ data class PlayerData(
     val equippedSkills: MutableMap<SkillSlot, String> = HashMap()
 ) {
 
+    fun getRequiredExp(): Double {
+        val baseXp = 100.0
+        val multiplier = 1.2
+        return baseXp * (multiplier.pow(level - 1))
+    }
+
     fun addExperience(amount: Double) {
         this.experience += amount
-        // TODO: Lógica de subir de nivel y desbloquear skills por nivel
+        checkLevelUp()
+    }
+
+    private fun checkLevelUp() {
+        var required = getRequiredExp()
+
+        while (this.experience >= required) {
+            this.experience -= required
+            this.level++
+
+            val player = Bukkit.getPlayer(uuid)
+            if (player != null) {
+                player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f)
+                player.sendTitle("§e¡NIVEL ASCENDIDO!", "§fAhora eres Nivel §a$level", 10, 70, 20)
+                player.sendMessage("§aHas alcanzado el nivel $level. ¡Revisa el menú de habilidades!")
+                updateStatsOnLevelUp()
+            }
+            required = getRequiredExp()
+        }
+    }
+
+    private fun updateStatsOnLevelUp() {
+        this.maxMana += 10
     }
 
     fun resetClassData(newClass: String) {

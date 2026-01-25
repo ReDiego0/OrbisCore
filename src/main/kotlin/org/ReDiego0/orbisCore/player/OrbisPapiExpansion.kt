@@ -28,6 +28,15 @@ class OrbisPapiExpansion(private val plugin: OrbisCore) : PlaceholderExpansion()
             params == "mana_max" -> String.format("%.1f", data.maxMana)
             params == "mana_int" -> data.currentMana.toInt().toString()
 
+            params == "exp_current" -> data.experience.toInt().toString()
+            params == "exp_required" -> data.getRequiredExp().toInt().toString()
+            params == "exp_percentage" -> {
+                val percent = (data.experience / data.getRequiredExp()) * 100
+                String.format("%.1f", percent) // "50.5"
+            }
+
+            params == "exp_bar" -> getProgressBar(data.experience, data.getRequiredExp())
+
             params.startsWith("skill_unlocked_") -> {
                 val skillId = params.removePrefix("skill_unlocked_")
                 data.isSkillUnlocked(skillId).toString()
@@ -44,5 +53,18 @@ class OrbisPapiExpansion(private val plugin: OrbisCore) : PlaceholderExpansion()
 
             else -> null
         }
+    }
+
+    private fun getProgressBar(current: Double, max: Double): String {
+        val totalBars = 10
+        val percent = current / max
+        val progressBars = (totalBars * percent).toInt()
+        val sb = StringBuilder("&a")
+
+        for (i in 0 until totalBars) {
+            if (i == progressBars) sb.append("&7") // Cambia a color gris para lo vacío
+            sb.append("|")
+        }
+        return sb.toString()
     }
 }
