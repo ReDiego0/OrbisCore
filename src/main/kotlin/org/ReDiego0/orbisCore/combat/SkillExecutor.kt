@@ -1,8 +1,8 @@
 package org.ReDiego0.orbisCore.combat
 
+import io.lumine.mythic.bukkit.MythicBukkit
 import net.kyori.adventure.text.Component
 import org.ReDiego0.orbisCore.OrbisCore
-import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 
@@ -17,9 +17,9 @@ class SkillExecutor(private val plugin: OrbisCore) {
         val classInfo = plugin.classRegistry.getClass(data.className) ?: return
         val skillInfo = classInfo.skills[skillId] ?: return
 
-        // TODO: En el futuro, el costo de maná y cooldown podrían venir del YAML de la skill.
+        // TODO: Mover estos valores al YAML de la skill en el futuro
         val manaCost = 20.0
-        val cooldownSeconds = 5.0
+        val cooldownSeconds = 2.0
 
         if (cooldownManager.isOnCooldown(uuid, skillId)) {
             val left = String.format("%.1f", cooldownManager.getRemainingSeconds(uuid, skillId))
@@ -34,16 +34,21 @@ class SkillExecutor(private val plugin: OrbisCore) {
             return
         }
 
-        data.currentMana -= manaCost
-        cooldownManager.setCooldown(uuid, skillId, cooldownSeconds)
+        if (!MythicBukkit.inst().skillManager.getSkill(skillInfo.mmSkill).isPresent) {
+            player.sendMessage("§cError: La habilidad '${skillInfo.mmSkill}' no existe en MythicMobs.")
+            plugin.logger.warning("La skill ${skillInfo.mmSkill} configurada en classes.yml no existe en la carpeta de MythicMobs.")
+            return
+        }
 
-        // Ejecutar MythicMobs
-        // Usamos dispatchCommand para máxima compatibilidad sin depender del .jar en local
-        // Formato: mm cast <SkillName> <Target>
-        val mmCommand = "mm cast ${skillInfo.mmSkill} @self"
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "execute at ${player.name} run $mmCommand")
+        val success = MythicBukkit.inst().apiHelper.castSkill(player, skillInfo.mmSkill)
 
-        // C. Feedback Visual (Opcional)
-        // player.sendMessage("§a¡Lanzaste ${skillInfo.displayName}!")
+        if (success) {
+            data.currentMana -= manaCost
+            cooldownManager.setCooldown(uuid, skillId, cooldownSeconds)
+
+            plugin.logger.info("Jugador ${player.name} lanzó ${skillInfo.mmSkill}")
+        } else {
+            player.sendMessage("§cLa habilidad falló al activarse.")
+        }
     }
 }
