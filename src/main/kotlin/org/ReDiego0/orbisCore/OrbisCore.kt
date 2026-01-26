@@ -5,8 +5,10 @@ import org.ReDiego0.orbisCore.combat.SkillExecutor
 import org.ReDiego0.orbisCore.commands.OrbisCommand
 import org.ReDiego0.orbisCore.config.ClassRegistry
 import org.ReDiego0.orbisCore.ether.EtherTask
+import org.ReDiego0.orbisCore.instances.InstanceManager
 import org.ReDiego0.orbisCore.instances.InstanceRegistry
 import org.ReDiego0.orbisCore.items.ItemProvider
+import org.ReDiego0.orbisCore.party.PartyManager
 import org.ReDiego0.orbisCore.player.MobLootListener
 import org.ReDiego0.orbisCore.player.OrbisPapiExpansion
 import org.ReDiego0.orbisCore.player.PlayerListener
@@ -21,8 +23,15 @@ class OrbisCore : JavaPlugin() {
     lateinit var classRegistry: ClassRegistry
         private set
     lateinit var skillExecutor: SkillExecutor
+        private set
     lateinit var itemProvider: ItemProvider
+        private set
     lateinit var instanceRegistry: InstanceRegistry
+        private set
+    lateinit var partyManager: PartyManager
+        private set
+    lateinit var instanceManager: InstanceManager
+        private set
 
     override fun onEnable() {
         logger.info("Iniciando OrbisCore...")
