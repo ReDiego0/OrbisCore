@@ -4,7 +4,7 @@ import org.ReDiego0.orbisCore.combat.CombatListener
 import org.ReDiego0.orbisCore.combat.SkillExecutor
 import org.ReDiego0.orbisCore.commands.OrbisCommand
 import org.ReDiego0.orbisCore.config.ClassRegistry
-import org.ReDiego0.orbisCore.ether.EtherTask // <--- Import nuevo
+import org.ReDiego0.orbisCore.ether.EtherTask
 import org.ReDiego0.orbisCore.instances.InstanceRegistry
 import org.ReDiego0.orbisCore.items.ItemProvider
 import org.ReDiego0.orbisCore.player.MobLootListener
