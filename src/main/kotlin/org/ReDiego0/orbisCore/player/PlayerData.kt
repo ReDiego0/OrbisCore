@@ -30,10 +30,14 @@ data class PlayerData(
         checkLevelUp()
     }
 
+    val MAX_LEVEL_BASE = 50
+
     private fun checkLevelUp() {
+        if (level >= MAX_LEVEL_BASE) return
+
         var required = getRequiredExp()
 
-        while (this.experience >= required) {
+        while (this.experience >= required && level < MAX_LEVEL_BASE) {
             this.experience -= required
             this.level++
 
@@ -43,6 +47,10 @@ data class PlayerData(
                 player.sendTitle("§e¡NIVEL ASCENDIDO!", "§fAhora eres Nivel §a$level", 10, 70, 20)
                 player.sendMessage("§aHas alcanzado el nivel $level. ¡Revisa el menú de habilidades!")
                 updateStatsOnLevelUp()
+            }
+
+            if (level == MAX_LEVEL_BASE) {
+                Bukkit.getPlayer(uuid)?.sendMessage("§6§l¡HAS ALCANZADO EL NIVEL MÁXIMO DE TU CLASE! Busca al Maestro para evolucionar.")
             }
             required = getRequiredExp()
         }

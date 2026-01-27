@@ -2,11 +2,10 @@ classes:
   VANGUARDIA:
     display_name: "&6Vanguardia"
     base_health: 30.0
-    base_mana: 60.0
+    base_mana: 100.0
     mana_regen: 2.0
     lore:
-      - "&7Canaliza el Éter hacia su cuerpo"
-      - "&7para convertirse en un muro inamovible."
+      - "&7Un muro inamovible de fuerza bruta."
 
     available_skills:
       golpe_sismico:
@@ -17,91 +16,102 @@ classes:
         mana_cost: 20.0
         cooldown: 5.0
         description:
-          - "&7Golpea el suelo causando daño"
-          - "&7en área y ralentizando enemigos."
+          - "&7Golpea el suelo y ralentiza."
+
+      carga_brutal:
+        display_name: "&6Carga Brutal"
+        mm_skill: "Orbis_CargaBrutal"
+        min_level: 5
+        slot: "Q"
+        mana_cost: 30.0
+        cooldown: 8.0
+        description:
+          - "&7Lánzate hacia el enemigo."
 
       piel_de_hierro:
-        display_name: "&7Piel de Hierro"
+        display_name: "&fPiel de Hierro"
         mm_skill: "Orbis_PielHierro"
         min_level: 3
         slot: "F"
-        mana_cost: 20.0
-        cooldown: 5.0
+        mana_cost: 40.0
+        cooldown: 20.0
         description:
-          - "&7Endurece tu piel, reduciendo"
-          - "&7el daño recibido un 30%."
-
-      grito_de_guerra:
-        display_name: "&cGrito de Guerra"
-        mm_skill: "Orbis_GritoGuerra"
-        min_level: 10
-        slot: "Q"
-        mana_cost: 20.0
-        cooldown: 5.0
-        description:
-          - "&7Aumenta el daño de tus aliados"
-          - "&7cercanos temporalmente."
-
-  CAZADOR:
-    display_name: "&aCazador del Viento"
-    base_health: 20.0
-    base_mana: 80.0
-    mana_regen: 3.5
-    lore:
-      - "&7Usa el Éter para moverse sin peso"
-      - "&7y golpear desde las sombras."
-
-    available_skills:
-      flecha_explosiva:
-        display_name: "&cFlecha Explosiva"
-        mm_skill: "Orbis_FlechaExplosiva"
-        min_level: 1
-        slot: "Q"
-        mana_cost: 20.0
-        cooldown: 5.0
-        description:
-          - "&7Dispara un proyectil que explota"
-          - "&7al impactar."
-
-      evasion:
-        display_name: "&fPaso Etéreo"
-        mm_skill: "Orbis_Evasion"
-        min_level: 5
-        slot: "F"
-        mana_cost: 20.0
-        cooldown: 5.0
-        description:
-          - "&7Te vuelves invisible brevemente"
-          - "&7y aumentas tu velocidad."
+          - "&7Reduce el daño recibido."
 
   TEJEDOR:
-    display_name: "&bTejedor de Luz"
-    base_health: 16.0
-    base_mana: 150.0
+    display_name: "&bTejedor"
+    base_health: 18.0
+    base_mana: 200.0
     mana_regen: 5.0
     lore:
-      - "&7Manipula el Éter ambiental puro"
-      - "&7para desatar la furia del Orbis."
+      - "&7Canalizador de Éter puro."
 
     available_skills:
-      rayo_prismatico:
-        display_name: "&bRayo Prismático"
-        mm_skill: "Orbis_RayoLuz"
+      rayo_arcano:
+        display_name: "&bRayo Arcano"
+        mm_skill: "Orbis_RayoArcano"
+        min_level: 1
+        slot: "Q"
+        mana_cost: 15.0
+        cooldown: 3.0
+        description:
+          - "&7Dispara un haz de energía."
+
+      bola_de_fuego:
+        display_name: "&cBola de Fuego"
+        mm_skill: "Orbis_BolaFuego"
+        min_level: 5
+        slot: "Q"
+        mana_cost: 35.0
+        cooldown: 6.0
+        description:
+          - "&7Explosión de fuego en área."
+
+      traslacion:
+        display_name: "&dTraslación"
+        mm_skill: "Orbis_Traslacion"
+        min_level: 2
+        slot: "F"
+        mana_cost: 50.0
+        cooldown: 12.0
+        description:
+          - "&7Teletransporte corto."
+
+  CAZADOR:
+    display_name: "&aCazador"
+    base_health: 22.0
+    base_mana: 120.0
+    mana_regen: 3.5
+    lore:
+      - "&7Maestro de la precisión."
+
+    available_skills:
+      flecha_perforante:
+        display_name: "&aFlecha Perforante"
+        mm_skill: "Orbis_FlechaPerf"
         min_level: 1
         slot: "Q"
         mana_cost: 20.0
-        cooldown: 5.0
+        cooldown: 4.0
         description:
-          - "&7Lanza un haz de luz concentrada"
-          - "&7que atraviesa enemigos."
+          - "&7Ignora parte de la armadura."
 
-      singularidad:
-        display_name: "&5Singularidad"
-        mm_skill: "Orbis_Singularidad"
-        min_level: 10
-        slot: "F"
-        mana_cost: 20.0
-        cooldown: 5.0
+      lluvia_de_flechas:
+        display_name: "&2Lluvia de Flechas"
+        mm_skill: "Orbis_LluviaFlechas"
+        min_level: 8
+        slot: "Q"
+        mana_cost: 40.0
+        cooldown: 10.0
         description:
-          - "&7Crea un pozo de gravedad que"
-          - "&7atrae a los enemigos al centro."
+          - "&7Área de daño continuo."
+
+      evasion:
+        display_name: "&fEvasión"
+        mm_skill: "Orbis_Evasion"
+        min_level: 4
+        slot: "F"
+        mana_cost: 25.0
+        cooldown: 15.0
+        description:
+          - "&7Salto atrás e invisibilidad."
