@@ -10,33 +10,12 @@ classes:
     available_skills:
       golpe_sismico:
         display_name: "&eGolpe Sísmico"
-        mm_skill: "Orbis_GolpeSismico"
         min_level: 1
         slot: "Q"
         mana_cost: 20.0
         cooldown: 5.0
         description:
           - "&7Golpea el suelo y ralentiza."
-
-      carga_brutal:
-        display_name: "&6Carga Brutal"
-        mm_skill: "Orbis_CargaBrutal"
-        min_level: 5
-        slot: "Q"
-        mana_cost: 30.0
-        cooldown: 8.0
-        description:
-          - "&7Lánzate hacia el enemigo."
-
-      piel_de_hierro:
-        display_name: "&fPiel de Hierro"
-        mm_skill: "Orbis_PielHierro"
-        min_level: 3
-        slot: "F"
-        mana_cost: 40.0
-        cooldown: 20.0
-        description:
-          - "&7Reduce el daño recibido."
 
   TEJEDOR:
     display_name: "&bTejedor"
@@ -49,33 +28,12 @@ classes:
     available_skills:
       rayo_arcano:
         display_name: "&bRayo Arcano"
-        mm_skill: "Orbis_RayoArcano"
         min_level: 1
         slot: "Q"
         mana_cost: 15.0
         cooldown: 3.0
         description:
           - "&7Dispara un haz de energía."
-
-      bola_de_fuego:
-        display_name: "&cBola de Fuego"
-        mm_skill: "Orbis_BolaFuego"
-        min_level: 5
-        slot: "Q"
-        mana_cost: 35.0
-        cooldown: 6.0
-        description:
-          - "&7Explosión de fuego en área."
-
-      traslacion:
-        display_name: "&dTraslación"
-        mm_skill: "Orbis_Traslacion"
-        min_level: 2
-        slot: "F"
-        mana_cost: 50.0
-        cooldown: 12.0
-        description:
-          - "&7Teletransporte corto."
 
   CAZADOR:
     display_name: "&aCazador"
@@ -88,30 +46,9 @@ classes:
     available_skills:
       flecha_perforante:
         display_name: "&aFlecha Perforante"
-        mm_skill: "Orbis_FlechaPerf"
         min_level: 1
         slot: "Q"
         mana_cost: 20.0
         cooldown: 4.0
         description:
           - "&7Ignora parte de la armadura."
-
-      lluvia_de_flechas:
-        display_name: "&2Lluvia de Flechas"
-        mm_skill: "Orbis_LluviaFlechas"
-        min_level: 8
-        slot: "Q"
-        mana_cost: 40.0
-        cooldown: 10.0
-        description:
-          - "&7Área de daño continuo."
-
-      evasion:
-        display_name: "&fEvasión"
-        mm_skill: "Orbis_Evasion"
-        min_level: 4
-        slot: "F"
-        mana_cost: 25.0
-        cooldown: 15.0
-        description:
-          - "&7Salto atrás e invisibilidad."
