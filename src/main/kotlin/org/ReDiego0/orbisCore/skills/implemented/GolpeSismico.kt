@@ -14,7 +14,6 @@ import org.bukkit.potion.PotionEffectType
 // Habilidad de Vanguardia
 
 class GolpeSismico(plugin: OrbisCore) : Skill(plugin, "golpe_sismico", SkillType.ACTIVE) {
-
     override fun onCast(player: Player): Boolean {
         val loc = player.location
         loc.world.playSound(loc, Sound.BLOCK_ANVIL_LAND, 0.5f, 0.5f)
