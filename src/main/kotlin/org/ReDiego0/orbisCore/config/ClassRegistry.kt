@@ -41,7 +41,6 @@ class ClassRegistry(private val plugin: OrbisCore) {
                         val skill = SkillInfo(
                             id = skillId,
                             displayName = config.getString("$sPath.display_name", skillId)!!.replace("&", "§"),
-                            mmSkill = config.getString("$sPath.mm_skill", "SkillError")!!,
                             minLevel = config.getInt("$sPath.min_level", 1),
                             validSlot = slotEnum,
                             description = config.getStringList("$sPath.description").map { it.replace("&", "§") },

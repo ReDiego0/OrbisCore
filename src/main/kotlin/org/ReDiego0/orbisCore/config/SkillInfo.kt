@@ -3,7 +3,6 @@ package org.ReDiego0.orbisCore.config
 data class SkillInfo(
     val id: String,
     val displayName: String,
-    val mmSkill: String,
     val minLevel: Int,
     val validSlot: SkillSlot,
     val description: List<String>,
