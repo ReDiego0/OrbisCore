@@ -13,6 +13,7 @@ import org.ReDiego0.orbisCore.player.MobLootListener
 import org.ReDiego0.orbisCore.player.OrbisPapiExpansion
 import org.ReDiego0.orbisCore.player.PlayerListener
 import org.ReDiego0.orbisCore.player.PlayerManager
+import org.ReDiego0.orbisCore.skills.SkillManager
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -32,12 +33,16 @@ class OrbisCore : JavaPlugin() {
         private set
     lateinit var instanceManager: InstanceManager
         private set
+    lateinit var skillManager: SkillManager
+        private set
 
     override fun onEnable() {
         logger.info("Iniciando OrbisCore...")
 
         classRegistry = ClassRegistry(this)
         classRegistry.loadClasses()
+
+        skillManager = SkillManager(this)
 
         itemProvider = ItemProvider(this)
 

@@ -7,6 +7,7 @@ import java.util.logging.Level
 
 class ClassRegistry(private val plugin: OrbisCore) {
     private val loadedClasses = HashMap<String, ClassInfo>()
+    var classesConfig: YamlConfiguration? = null
 
     fun loadClasses() {
         val file = File(plugin.dataFolder, "classes.yml")

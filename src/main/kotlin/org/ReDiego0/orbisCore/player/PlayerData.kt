@@ -67,6 +67,22 @@ data class PlayerData(
         this.currentMana = 0.0
     }
 
+    fun consumeMana(amount: Double) {
+        this.currentMana = (this.currentMana - amount).coerceAtLeast(0.0)
+    }
+
+    private val cooldowns = HashMap<String, Long>()
+
+    fun setCooldown(skillId: String, durationMillis: Long) {
+        cooldowns[skillId] = System.currentTimeMillis() + durationMillis
+    }
+
+    fun getCooldown(skillId: String): Long {
+        val end = cooldowns[skillId] ?: return 0
+        val remaining = end - System.currentTimeMillis()
+        return if (remaining > 0) remaining else 0
+    }
+
     fun isSkillUnlocked(skillId: String): Boolean = unlockedSkills.contains(skillId)
 
     fun equipSkill(slot: SkillSlot, skillId: String): Boolean {
